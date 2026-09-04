@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SIGNALSAFE - User Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header class="top-header">
+
+        <div class="logo">
+
+            🛡️ SIGNALSAFE
+
+        </div>
+
+        <div class="live-status">
+
+            🟢 SYSTEM LIVE
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         MAIN CONTAINER
+    ========================================= -->
+
+    <main class="container">
+
+
+        <!-- ========================================
+             WELCOME
+        ========================================= -->
+
+        <section class="welcome-section">
+
+            <h1>
+                Welcome to SIGNALSAFE
+            </h1>
+
+            <p>
+                AI-powered crowd safety and
+                emergency management
+            </p>
+
+        </section>
+
+
+        <!-- ========================================
+             ADMIN ALERTS
+        ========================================= -->
+
+        <section class="alert-section">
+
+            <div class="alert-header">
+
+                <h2>
+                    📢 Safety Alerts
+                </h2>
+
+                <span class="alert-indicator">
+                    LIVE
+                </span>
+
+            </div>
+
+
+            <div
+                id="userAlertsContainer"
+                class="user-alerts-container"
+            >
+
+                <div class="no-user-alert">
+
+                    🟢 No new safety alerts
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             PARTICIPANT + EVENT
+        ========================================= -->
+
+        <section class="dashboard-grid">
+
+
+            <div class="card">
+
+                <h2>
+                    🎫 Participant ID
+                </h2>
+
+                <div class="participant-id">
+
+                    SS-001-0001
+
+                </div>
+
+                <p>
+                    Your SIGNALSAFE identity
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    🎪 Current Event
+                </h2>
+
+                <p>
+                    <strong>
+                        Event ID:
+                    </strong>
+                    1
+                </p>
+
+                <p>
+                    <strong>
+                        Status:
+                    </strong>
+
+                    <span>
+                        🟢 Active
+                    </span>
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ========================================
+             SAFETY STATUS
+        ========================================= -->
+
+        <section class="safety-card">
+
+            <div
+                class="safety-icon"
+                id="safetyIcon"
+            >
+                ✓
+            </div>
+
+
+            <div>
+
+                <h2 id="safetyTitle">
+                    SAFE
+                </h2>
+
+                <p id="safetyMessage">
+                    Crowd density is under control
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             QUICK ACTIONS
+        ======================================== -->
+
+        <section class="card">
+
+            <h2>
+                ⚡ Quick Actions
+            </h2>
+
+
+            <div class="quick-actions">
+
+                <button
+                    onclick="showZones()"
+                    class="action-button"
+                >
+                    👥 Live Zones
+                </button>
+
+
+                <button
+                    onclick="showMap()"
+                    class="action-button"
+                >
+                    🗺️ Risk Map
+                </button>
+
+
+                <button
+                    onclick="showCCTV()"
+                    class="action-button"
+                >
+                    📹 CCTV + AI
+                </button>
+
+
+                <button
+                    onclick="showRisk()"
+                    class="action-button"
+                >
+                    📊 Crowd Risk
+                </button>
+
+
+                <button
+                    onclick="showSafeRoute()"
+                    class="action-button"
+                >
+                    🚶 Safe Route
+                </button>
+
+
+                <button
+                    onclick="getLocation()"
+                    class="action-button"
+                >
+                    📍 My GPS
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             LIVE ZONES
+        ========================================= -->
+
+        <section
+            id="liveZones"
+            class="card"
+        >
+
+            <h2>
+                👥 Live Crowd Zones
+            </h2>
+
+
+            <div class="zones-grid">
+
+
+                <div class="zone-card safe-zone">
+
+                    <h3>
+                        Zone A
+                    </h3>
+
+                    <div class="zone-status">
+                        🟢 SAFE
+                    </div>
+
+                    <p>
+                        Crowd: 320
+                    </p>
+
+                </div>
+
+
+                <div class="zone-card warning-zone">
+
+                    <h3>
+                        Zone B
+                    </h3>
+
+                    <div class="zone-status">
+                        🟡 WARNING
+                    </div>
+
+                    <p>
+                        Crowd: 680
+                    </p>
+
+                </div>
+
+
+                <div class="zone-card danger-zone">
+
+                    <h3>
+                        Zone C
+                    </h3>
+
+                    <div class="zone-status">
+                        🔴 DANGER
+                    </div>
+
+                    <p>
+                        Crowd: 920
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             RISK MAP
+        ========================================= -->
+
+        <section
+            id="riskMap"
+            class="card"
+        >
+
+            <h2>
+                🗺️ Interactive Risk Map
+            </h2>
+
+
+            <div class="risk-map">
+
+                <div class="map-zone map-safe">
+                    🟢
+                    <span>
+                        Safe Zone
+                    </span>
+                </div>
+
+
+                <div class="map-zone map-warning">
+                    🟡
+                    <span>
+                        Warning Zone
+                    </span>
+                </div>
+
+
+                <div class="map-zone map-danger">
+                    🔴
+                    <span>
+                        Danger Zone
+                    </span>
+                </div>
+
+
+                <div class="map-exit">
+                    🚪 Emergency Exit
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CCTV + AI
+        ========================================= -->
+
+        <section
+            id="cctvSection"
+            class="card"
+        >
+
+            <h2>
+                📹 CCTV + AI People Detection
+            </h2>
+
+
+            <div class="cctv-box">
+
+                <div class="camera-icon">
+                    📹
+                </div>
+
+                <p>
+                    AI Camera Monitoring
+                </p>
+
+                <div class="ai-status">
+                    🟢 AI ACTIVE
+                </div>
+
+            </div>
+
+
+            <div class="people-count">
+
+                <span>
+                    Detected People
+                </span>
+
+                <strong id="peopleCount">
+                    780
+                </strong>
+
+            </div>
+
+
+            <button
+                onclick="runAI()"
+                class="ai-button"
+            >
+                🤖 Run AI Detection
+            </button>
+
+        </section>
+
+
+        <!-- ========================================
+             DENSITY + SPACING + RISK
+        ========================================= -->
+
+        <section
+            id="riskSection"
+            class="card"
+        >
+
+            <h2>
+                📊 Density + Spacing + Risk
+            </h2>
+
+
+            <div class="risk-grid">
+
+
+                <div class="risk-box">
+
+                    <span>
+                        Crowd Density
+                    </span>
+
+                    <strong id="densityValue">
+                        65%
+                    </strong>
+
+                </div>
+
+
+                <div class="risk-box">
+
+                    <span>
+                        Average Spacing
+                    </span>
+
+                    <strong id="spacingValue">
+                        1.8 m
+                    </strong>
+
+                </div>
+
+
+                <div class="risk-box">
+
+                    <span>
+                        Risk Score
+                    </span>
+
+                    <strong id="riskScore">
+                        45
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="riskLevel"
+                class="risk-level"
+            >
+                MEDIUM RISK
+            </div>
+
+
+            <p
+                id="riskResult"
+                class="risk-result"
+            >
+                🟡 Current Risk:
+                <strong>
+                    MEDIUM
+                </strong>
+            </p>
+
+
+            <button
+                onclick="calculateRisk()"
+                class="action-button"
+            >
+                🔄 Calculate Risk
+            </button>
+
+        </section>
+
+
+        <!-- ========================================
+             SAFE ROUTE
+        ========================================= -->
+
+        <section
+            id="safeRouteSection"
+            class="card"
+        >
+
+            <h2>
+                🚶 Safe Route
+            </h2>
+
+
+            <p>
+                SIGNALSAFE recommends the
+                safest available route based
+                on current crowd conditions.
+            </p>
+
+
+            <button
+                onclick="getSafeRouteWithGPS()"
+                class="route-button"
+            >
+                📍 Find Safest Route
+            </button>
+
+
+            <button
+                onclick="checkRouteSafety()"
+                class="action-button"
+            >
+                🛡️ Check Route Safety
+            </button>
+
+
+            <div
+                id="safeRouteContainer"
+                class="safe-route-container"
+            >
+
+                <div class="route-status">
+
+                    🟢 SAFE ROUTE AVAILABLE
+
+                </div>
+
+
+                <div class="route-path">
+
+                    <div class="route-point">
+
+                        📍
+                        <strong>
+                            Your Current Location
+                        </strong>
+
+                    </div>
+
+
+                    <div class="route-line">
+                        ↓
+                    </div>
+
+
+                    <div class="route-point">
+
+                        🟢
+                        <strong>
+                            Zone A
+                        </strong>
+
+                    </div>
+
+
+                    <div class="route-line">
+                        ↓
+                    </div>
+
+
+                    <div class="route-point">
+
+                        🛡️
+                        <strong>
+                            Safe Corridor
+                        </strong>
+
+                    </div>
+
+
+                    <div class="route-line">
+                        ↓
+                    </div>
+
+
+                    <div class="route-point">
+
+                        🚪
+                        <strong>
+                            Emergency Exit
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="route-details">
+
+                    <div>
+
+                        <span>
+                            📏 Distance
+                        </span>
+
+                        <strong>
+                            450 meters
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            ⏱️ Estimated Time
+                        </span>
+
+                        <strong>
+                            6 minutes
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            🟢 Safety
+                        </span>
+
+                        <strong>
+                            SAFE
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             EMERGENCY SOS
+        ========================================= -->
+
+        <section class="sos-section">
+
+            <h2>
+                🚨 Emergency SOS
+            </h2>
+
+
+            <p>
+                If you are in danger,
+                immediately contact the
+                SIGNALSAFE Control Center.
+            </p>
+
+
+            <button
+                onclick="sendSOS()"
+                class="sos-button"
+            >
+                🚨 SEND SOS
+            </button>
+
+
+            <div class="emergency-numbers">
+
+                <a href="tel:112">
+                    🚨 Emergency: 112
+                </a>
+
+                <a href="tel:108">
+                    🚑 Ambulance: 108
+                </a>
+
+                <a href="tel:101">
+                    🔥 Fire: 101
+                </a>
+
+                <a href="tel:100">
+                    👮 Police: 100
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <p>
+            🛡️ SIGNALSAFE
+            <br>
+            AI Powered Crowd Safety System
+        </p>
+
+    </footer>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="script.js"></script>
+
+    <script src="route.js"></script>
+
+
+</body>
+
+</html>

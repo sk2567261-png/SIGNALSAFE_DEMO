@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SIGNALSAFE - Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header class="top-header">
+
+        <div class="logo">
+            🛡️ SIGNALSAFE
+        </div>
+
+        <div class="admin-status">
+            🟢 ADMIN SYSTEM LIVE
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         MAIN
+    ========================================= -->
+
+    <main class="container">
+
+
+        <!-- ========================================
+             TITLE
+        ========================================= -->
+
+        <section class="welcome-section">
+
+            <h1>
+                SIGNALSAFE Admin Dashboard
+            </h1>
+
+            <p>
+                AI-powered Crowd Safety
+                Control Center
+            </p>
+
+        </section>
+
+
+        <!-- ========================================
+             STATISTICS
+        ========================================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Participants
+                    </span>
+
+                    <strong id="analyticsParticipants">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🚨
+                </div>
+
+                <div>
+
+                    <span>
+                        Total SOS
+                    </span>
+
+                    <strong id="analyticsSOS">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📢
+                </div>
+
+                <div>
+
+                    <span>
+                        Alerts
+                    </span>
+
+                    <strong id="analyticsAlerts">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <span>
+                        Risk Score
+                    </span>
+
+                    <strong id="analyticsRisk">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ANALYTICS
+        ========================================= -->
+
+        <section class="analytics-section">
+
+            <div class="section-title">
+
+                <h2>
+                    📊 Event Analytics
+                </h2>
+
+                <span id="analyticsStatus">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <!-- CROWD ANALYTICS -->
+
+            <div class="analytics-grid">
+
+
+                <div class="analytics-card">
+
+                    <h3>
+                        👥 Crowd Analytics
+                    </h3>
+
+
+                    <div class="analytics-value">
+
+                        <strong id="analyticsCrowd">
+                            --
+                        </strong>
+
+                        <span>
+                            Total Crowd
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-container">
+
+                        <div
+                            id="densityBar"
+                            class="progress-bar"
+                        ></div>
+
+                    </div>
+
+
+                    <p>
+
+                        Density:
+                        <strong id="analyticsDensity">
+                            --
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+
+                        Average Spacing:
+                        <strong id="analyticsSpacing">
+                            --
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <!-- ZONE ANALYTICS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        🗺️ Zone Analytics
+                    </h3>
+
+
+                    <div class="zone-stat safe">
+
+                        🟢 Safe Zones
+
+                        <strong id="safeZones">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zone-stat warning">
+
+                        🟡 Warning Zones
+
+                        <strong id="warningZones">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zone-stat danger">
+
+                        🔴 Danger Zones
+
+                        <strong id="dangerZones">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RISK ANALYTICS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        🛡️ Safety Risk
+                    </h3>
+
+
+                    <div
+                        id="riskCircle"
+                        class="risk-circle"
+                    >
+
+                        <strong id="riskScoreLarge">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        id="riskLevelLarge"
+                        class="risk-level"
+                    >
+                        Loading...
+                    </div>
+
+                </div>
+
+
+                <!-- EVENT ANALYTICS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        🎪 Event Statistics
+                    </h3>
+
+
+                    <div class="event-stat">
+
+                        Total Events
+
+                        <strong id="totalEvents">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="event-stat">
+
+                        New SOS
+
+                        <strong id="newSOS">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="event-stat">
+
+                        Safety Alerts
+
+                        <strong id="totalAlerts">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                onclick="loadAnalytics()"
+                class="refresh-button"
+            >
+                🔄 Refresh Analytics
+            </button>
+
+        </section>
+
+
+        <!-- ========================================
+             CURRENT EVENT
+        ========================================= -->
+
+        <section class="card">
+
+            <h2>
+                🎪 Current Event
+            </h2>
+
+            <p>
+                <strong>
+                    Event ID:
+                </strong>
+
+                1
+            </p>
+
+            <p>
+                <strong>
+                    Status:
+                </strong>
+
+                🟢 Active
+            </p>
+
+        </section>
+
+
+        <!-- ========================================
+             LIVE ZONES
+        ========================================= -->
+
+        <section class="card">
+
+            <h2>
+                👥 Live Crowd Zones
+            </h2>
+
+
+            <div class="zones-grid">
+
+
+                <div class="zone-card safe-zone">
+
+                    <h3>
+                        Zone A
+                    </h3>
+
+                    <div>
+                        🟢 SAFE
+                    </div>
+
+                    <p>
+                        Crowd: 320
+                    </p>
+
+                </div>
+
+
+                <div class="zone-card warning-zone">
+
+                    <h3>
+                        Zone B
+                    </h3>
+
+                    <div>
+                        🟡 WARNING
+                    </div>
+
+                    <p>
+                        Crowd: 680
+                    </p>
+
+                </div>
+
+
+                <div class="zone-card danger-zone">
+
+                    <h3>
+                        Zone C
+                    </h3>
+
+                    <div>
+                        🔴 DANGER
+                    </div>
+
+                    <p>
+                        Crowd: 920
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             SEND USER ALERT
+        ========================================= -->
+
+        <section class="alert-section">
+
+            <div class="section-title">
+
+                <h2>
+                    📢 Send Safety Alert
+                </h2>
+
+            </div>
+
+
+            <div class="alert-form">
+
+
+                <input
+                    type="text"
+                    id="alertTitle"
+                    placeholder="Alert Title"
+                >
+
+
+                <textarea
+                    id="alertMessage"
+                    placeholder="Enter safety message"
+                ></textarea>
+
+
+                <select id="alertType">
+
+                    <option value="SAFETY">
+                        🟢 SAFETY
+                    </option>
+
+                    <option value="WARNING">
+                        🟡 WARNING
+                    </option>
+
+                    <option value="EMERGENCY">
+                        🔴 EMERGENCY
+                    </option>
+
+                    <option value="INFO">
+                        🔵 INFO
+                    </option>
+
+                </select>
+
+
+                <button
+                    onclick="sendAlert()"
+                    class="send-alert-button"
+                >
+                    📢 Send Alert
+                </button>
+
+
+                <div id="alertStatus"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             SOS ALERTS
+        ========================================= -->
+
+        <section class="sos-section">
+
+            <div class="section-title">
+
+                <h2>
+                    🚨 Emergency SOS Alerts
+                </h2>
+
+                <button
+                    onclick="loadSOS()"
+                    class="refresh-button"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <div class="emergency-count">
+
+                Active Emergencies:
+
+                <strong id="emergencyCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div
+                id="sosContainer"
+                class="sos-container"
+            >
+
+                <div class="no-alert">
+
+                    🟢 No emergency alerts
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <p>
+            🛡️ SIGNALSAFE
+            <br>
+            Admin Control Center
+        </p>
+
+    </footer>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
