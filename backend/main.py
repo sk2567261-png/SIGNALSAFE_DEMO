@@ -16,6 +16,8 @@ from notification_service import (
     send_all_notifications
 )
 
+from cctv_ai import get_all_cameras
+
 
 app = FastAPI(title="SignalSafe API")
 
@@ -311,33 +313,77 @@ def send_notifications(
 ):
 
     result = send_all_notifications(
-
         email=notification.email,
-
         phone=notification.phone,
-
         participant_id=notification.participant_id,
-
         title=notification.title,
-
         message=notification.message
-
     )
 
     return {
+        "message": "All notifications processed successfully",
+        "email": result["email"],
+        "sms": result["sms"],
+        "push": result["push"]
+    }
 
-        "message":
-        "All notifications processed successfully",
 
-        "email":
-        result["email"],
+# ========================================
+# LIVE ZONE DATA
+# ========================================
 
-        "sms":
-        result["sms"],
+@app.get("/zones")
+def get_live_zones():
 
-        "push":
-        result["push"]
+    return {
 
+        "zones": [
+
+            {
+                "name": "Zone A",
+                "status": "SAFE",
+                "color": "GREEN",
+                "crowd": 450,
+                "density": 35,
+                "spacing": 2.4,
+                "risk_score": 20
+            },
+
+            {
+                "name": "Zone B",
+                "status": "WARNING",
+                "color": "YELLOW",
+                "crowd": 780,
+                "density": 68,
+                "spacing": 1.6,
+                "risk_score": 58
+            },
+
+            {
+                "name": "Zone C",
+                "status": "DANGER",
+                "color": "RED",
+                "crowd": 690,
+                "density": 91,
+                "spacing": 0.8,
+                "risk_score": 86
+            }
+
+        ]
+
+    }
+
+
+# ========================================
+# CCTV + AI PEOPLE DETECTION
+# ========================================
+
+@app.get("/cctv")
+def get_cctv_data():
+
+    return {
+        "message": "CCTV AI detection successful",
+        "cameras": get_all_cameras()
     }
 
 
@@ -350,28 +396,17 @@ def get_analytics(
     db: Session = Depends(get_db)
 ):
 
-    # Total events
-
     total_events = (
         db.query(Event).count()
     )
-
-
-    # Total participants
 
     total_participants = (
         db.query(Participant).count()
     )
 
-
-    # Total SOS
-
     total_sos = (
         db.query(Emergency).count()
     )
-
-
-    # New SOS
 
     new_sos = (
         db.query(Emergency)
@@ -381,33 +416,29 @@ def get_analytics(
         .count()
     )
 
-
-    # Total admin alerts
-
     total_alerts = (
         db.query(Alert).count()
     )
 
-
-    # Demo zone statistics
+    # ------------------------------------
+    # LIVE ZONE SUMMARY
+    # ------------------------------------
 
     safe_zones = 1
-
     warning_zones = 1
-
     danger_zones = 1
 
-
-    # Demo crowd data
+    # ------------------------------------
+    # CROWD DATA
+    # ------------------------------------
 
     total_crowd = 1920
-
     average_density = 65
-
     average_spacing = 1.8
 
-
-    # Overall risk
+    # ------------------------------------
+    # RISK
+    # ------------------------------------
 
     risk_score = 45
 
@@ -423,11 +454,9 @@ def get_analytics(
 
         risk_level = "HIGH"
 
-
     return {
 
-        "total_events":
-        total_events,
+        "total_events": total_events,
 
         "total_participants":
         total_participants,

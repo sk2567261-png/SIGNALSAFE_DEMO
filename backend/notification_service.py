@@ -1,12 +1,13 @@
 # ========================================
-# SIGNALSAFE NOTIFICATION SERVICE
+# SIGNALSAFE
+# NOTIFICATION SERVICE
 # ========================================
 
 from datetime import datetime
 
 
 # ========================================
-# EMAIL NOTIFICATION
+# SEND EMAIL NOTIFICATION
 # ========================================
 
 def send_email(
@@ -15,15 +16,29 @@ def send_email(
     message
 ):
 
-    print("\n================================")
-    print("📧 EMAIL NOTIFICATION")
-    print("================================")
+    print(
+        "\n📧 EMAIL NOTIFICATION"
+    )
 
-    print("To:", recipient)
-    print("Subject:", subject)
-    print("Message:", message)
+    print(
+        "To:",
+        recipient
+    )
 
-    print("================================\n")
+    print(
+        "Subject:",
+        subject
+    )
+
+    print(
+        "Message:",
+        message
+    )
+
+    print(
+        "Time:",
+        datetime.now()
+    )
 
     return {
         "type": "EMAIL",
@@ -31,12 +46,13 @@ def send_email(
         "subject": subject,
         "message": message,
         "status": "SENT",
-        "time": datetime.utcnow().isoformat()
+        "timestamp":
+            datetime.now().isoformat()
     }
 
 
 # ========================================
-# SMS NOTIFICATION
+# SEND SMS NOTIFICATION
 # ========================================
 
 def send_sms(
@@ -44,26 +60,37 @@ def send_sms(
     message
 ):
 
-    print("\n================================")
-    print("📱 SMS NOTIFICATION")
-    print("================================")
+    print(
+        "\n📱 SMS NOTIFICATION"
+    )
 
-    print("Phone:", phone)
-    print("Message:", message)
+    print(
+        "Phone:",
+        phone
+    )
 
-    print("================================\n")
+    print(
+        "Message:",
+        message
+    )
+
+    print(
+        "Time:",
+        datetime.now()
+    )
 
     return {
         "type": "SMS",
         "phone": phone,
         "message": message,
         "status": "SENT",
-        "time": datetime.utcnow().isoformat()
+        "timestamp":
+            datetime.now().isoformat()
     }
 
 
 # ========================================
-# PUSH NOTIFICATION
+# SEND PUSH NOTIFICATION
 # ========================================
 
 def send_push_notification(
@@ -72,23 +99,39 @@ def send_push_notification(
     message
 ):
 
-    print("\n================================")
-    print("🔔 PUSH NOTIFICATION")
-    print("================================")
+    print(
+        "\n🔔 PUSH NOTIFICATION"
+    )
 
-    print("Participant:", participant_id)
-    print("Title:", title)
-    print("Message:", message)
+    print(
+        "Participant:",
+        participant_id
+    )
 
-    print("================================\n")
+    print(
+        "Title:",
+        title
+    )
+
+    print(
+        "Message:",
+        message
+    )
+
+    print(
+        "Time:",
+        datetime.now()
+    )
 
     return {
         "type": "PUSH",
-        "participant_id": participant_id,
+        "participant_id":
+            participant_id,
         "title": title,
         "message": message,
         "status": "SENT",
-        "time": datetime.utcnow().isoformat()
+        "timestamp":
+            datetime.now().isoformat()
     }
 
 
@@ -110,26 +153,29 @@ def send_all_notifications(
         message
     )
 
-
     sms_result = send_sms(
         phone,
         message
     )
 
-
     push_result = send_push_notification(
-        participant_id,
-        title,
-        message
-    )
-
+            participant_id,
+            title,
+            message
+        )
 
     return {
 
-        "email": email_result,
+        "email":
+            email_result,
 
-        "sms": sms_result,
+        "sms":
+            sms_result,
 
-        "push": push_result
+        "push":
+            push_result,
+
+        "status":
+            "ALL NOTIFICATIONS SENT"
 
     }

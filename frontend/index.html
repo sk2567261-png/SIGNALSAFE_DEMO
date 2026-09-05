@@ -17,6 +17,17 @@
         href="style.css"
     >
 
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Leaflet Map JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
 </head>
 
 
@@ -30,15 +41,11 @@
     <header class="top-header">
 
         <div class="logo">
-
             🛡️ SIGNALSAFE
-
         </div>
 
         <div class="live-status">
-
             🟢 SYSTEM LIVE
-
         </div>
 
     </header>
@@ -70,7 +77,7 @@
 
 
         <!-- ========================================
-             ADMIN ALERTS
+             SAFETY ALERTS
         ========================================= -->
 
         <section class="alert-section">
@@ -94,9 +101,7 @@
             >
 
                 <div class="no-user-alert">
-
                     🟢 No new safety alerts
-
                 </div>
 
             </div>
@@ -118,9 +123,7 @@
                 </h2>
 
                 <div class="participant-id">
-
                     SS-001-0001
-
                 </div>
 
                 <p>
@@ -190,7 +193,7 @@
 
         <!-- ========================================
              QUICK ACTIONS
-        ======================================== -->
+        ========================================= -->
 
         <section class="card">
 
@@ -242,7 +245,7 @@
 
 
                 <button
-                    onclick="getLocation()"
+                    onclick="getGPS()"
                     class="action-button"
                 >
                     📍 My GPS
@@ -327,11 +330,11 @@
 
 
         <!-- ========================================
-             RISK MAP
+             INTERACTIVE RISK MAP
         ========================================= -->
 
         <section
-            id="riskMap"
+            id="riskMapSection"
             class="card"
         >
 
@@ -340,35 +343,111 @@
             </h2>
 
 
+            <!-- REAL MAP -->
+            <div
+                id="riskMap"
+                style="
+                    width: 100%;
+                    height: 450px;
+                    border-radius: 15px;
+                    margin-top: 20px;
+                "
+            ></div>
+
+
+            <!-- MAP INFORMATION -->
+
             <div class="risk-map">
 
                 <div class="map-zone map-safe">
+
                     🟢
+
                     <span>
                         Safe Zone
                     </span>
+
                 </div>
+                <div style="margin-top:20px;">
+
+    <button
+        onclick="findSafeRoute()"
+        style="
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#16a34a;
+            color:white;
+            font-size:17px;
+            font-weight:bold;
+            cursor:pointer;
+        "
+    >
+        🛣️ Find Safest Route
+    </button>
+
+</div>
+
+<div
+    id="safeRouteResult"
+    style="
+        margin-top:15px;
+        padding:15px;
+        border-radius:12px;
+        background:#f0fdf4;
+        display:none;
+    "
+></div>
 
 
                 <div class="map-zone map-warning">
+
                     🟡
+
                     <span>
                         Warning Zone
                     </span>
+
                 </div>
 
 
                 <div class="map-zone map-danger">
+
                     🔴
+
                     <span>
                         Danger Zone
                     </span>
+
                 </div>
 
 
                 <div class="map-exit">
+
                     🚪 Emergency Exit
+
                 </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             GPS LOCATION
+        ========================================= -->
+
+        <section class="card">
+
+            <h2>
+                📍 My GPS Location
+            </h2>
+
+
+            <div id="gpsLocation">
+
+                📍 GPS location not detected yet.
 
             </div>
 
@@ -570,6 +649,7 @@
                     <div class="route-point">
 
                         📍
+
                         <strong>
                             Your Current Location
                         </strong>
@@ -585,6 +665,7 @@
                     <div class="route-point">
 
                         🟢
+
                         <strong>
                             Zone A
                         </strong>
@@ -600,6 +681,7 @@
                     <div class="route-point">
 
                         🛡️
+
                         <strong>
                             Safe Corridor
                         </strong>
@@ -615,6 +697,7 @@
                     <div class="route-point">
 
                         🚪
+
                         <strong>
                             Emergency Exit
                         </strong>
@@ -625,6 +708,7 @@
 
 
                 <div class="route-details">
+
 
                     <div>
 
@@ -663,6 +747,7 @@
                         </strong>
 
                     </div>
+
 
                 </div>
 
@@ -730,9 +815,13 @@
     <footer>
 
         <p>
+
             🛡️ SIGNALSAFE
+
             <br>
+
             AI Powered Crowd Safety System
+
         </p>
 
     </footer>
